@@ -8,8 +8,8 @@ productos = {}
 
 # Lista de códigos de escupideras (NOMBRE + PRECIO placeholder "$%%%")
 codigos_escupideras = {
-    "ESC-LIGHT": ("Escupidera Light con tapa", "$%%%"),
-    "ESLB-BASE": ("Escupidera Light base", "$%%%"),
+    "ESCL": ("Escupidera Light con tapa", "$%%%"),
+    "ESL-B": ("Escupidera Light base", "$%%%"),
     "ESST": ("Escupidera Estándar", "$%%%"),
     "ESST-B": ("Escupidera Estándar base", "$%%%"),
     "ESCB": ("Escupidera Cronos", "$%%%"),
@@ -18,7 +18,7 @@ codigos_escupideras = {
     "ESCHB-B": ("Escupidera Huevo base", "$%%%"),
     "ESCZ": ("Escupidera Zapato", "$%%%"),
     "ESCZ-B": ("Escupidera Zapato base", "$%%%"),
-    "ESC-ESTANDAR": ("Escupidera Estándar", "$%%%")
+    "ESCES": ("Escupidera Estándar", "$%%%")
 }
 
 # -----------------------
@@ -30,6 +30,13 @@ def agregar_producto():
     cantidad = entry_cantidad.get().strip()
     precio = entry_precio.get().strip()
     categoria = entry_categoria.get().strip()
+    
+    # Si la categoría es Escupideras, validar que se seleccione al menos la tapa
+    if categoria == "Escupideras":
+        codigo_tapa = combo_tapa.get().strip().upper()
+        if not codigo_tapa:
+            messagebox.showerror("Error", "Debes seleccionar una tapa para Escupideras")
+            return
 
     if not codigo or not nombre or not cantidad or not precio or not categoria:
         messagebox.showerror("Error", "Todos los campos son obligatorios")
@@ -58,6 +65,11 @@ def agregar_producto():
     # limpiar y ocultar combobox
     combo_codigos.set("")
     combo_codigos.grid_remove()
+    
+    # Limpiar tapa y base
+    combo_tapa.set("")
+    combo_base.set("")
+    label_base_info.config(text="")
 
 
 def actualizar_tabla():
@@ -81,9 +93,88 @@ def set_categoria(cat):
     if cat == "Escupideras":
         combo_codigos['values'] = list(codigos_escupideras.keys())
         combo_codigos.grid(row=0, column=2, padx=(10,0), pady=5, sticky="w")
+        
+        # Separar tapas y bases
+        tapas = [cod for cod in codigos_escupideras.keys() if not cod.endswith("-B")]
+        bases = [cod for cod in codigos_escupideras.keys() if cod.endswith("-B")]
+        
+        # Mostrar secciones de tapa y base
+        combo_tapa['values'] = tapas
+        combo_base['values'] = bases
+        
+        label_tapa.grid()
+        combo_tapa.grid()
+        label_base.grid()
+        combo_base.grid()
     else:
         combo_codigos.grid_remove()
         combo_codigos.set("")
+        # Ocultar secciones de tapa y base
+        label_tapa.grid_remove()
+        combo_tapa.grid_remove()
+        label_base.grid_remove()
+        combo_base.grid_remove()
+        combo_tapa.set("")
+        combo_base.set("")
+        label_base_info.config(text="")
+
+
+def obtener_codigo_base(codigo_tapa):
+    """Obtiene el código de la base correspondiente a una tapa"""
+    # Si el código no termina en -B, agregamos -B
+    if not codigo_tapa.endswith("-B"):
+        codigo_base = codigo_tapa + "-B"
+        # Verificar si existe en la lista de escupideras
+        if codigo_base in codigos_escupideras:
+            return codigo_base
+    return None
+
+
+def obtener_codigo_tapa(codigo_base):
+    """Obtiene el código de la tapa correspondiente a una base"""
+    # Si el código termina en -B, lo removemos
+    if codigo_base.endswith("-B"):
+        codigo_tapa = codigo_base[:-2]
+        # Verificar si existe en la lista de escupideras
+        if codigo_tapa in codigos_escupideras:
+            return codigo_tapa
+    return None
+
+
+def seleccionar_codigo_tapa(event):
+    """Cuando el usuario selecciona una tapa"""
+    codigo_tapa = combo_tapa.get().strip().upper()
+    
+    if codigo_tapa in codigos_escupideras:
+        nombre_tapa, precio_tapa = codigos_escupideras[codigo_tapa]
+        
+        # Autocompletar el código principal con la tapa
+        entry_codigo.delete(0, tk.END)
+        entry_codigo.insert(0, codigo_tapa)
+        
+        entry_nombre.delete(0, tk.END)
+        entry_nombre.insert(0, nombre_tapa)
+        
+        entry_precio.delete(0, tk.END)
+        entry_precio.insert(0, precio_tapa)
+        
+        # Sugerir la base correspondiente
+        codigo_base = obtener_codigo_base(codigo_tapa)
+        if codigo_base:
+            # Mostrar automáticamente la base en el combo_base
+            combo_base.set(codigo_base)
+            # Mostrar también el nombre y precio de la base
+            nombre_base, precio_base = codigos_escupideras[codigo_base]
+            label_base_info.config(text=f"{nombre_base} - {precio_base}")
+
+
+def seleccionar_codigo_base(event):
+    """Cuando el usuario selecciona una base"""
+    codigo_base = combo_base.get().strip().upper()
+    
+    if codigo_base in codigos_escupideras:
+        nombre_base, precio_base = codigos_escupideras[codigo_base]
+        label_base_info.config(text=f"{nombre_base} - {precio_base}")
 
 
 def seleccionar_codigo(event):
@@ -157,6 +248,37 @@ entry_precio.grid(row=3, column=1, pady=5, padx=10, sticky="w")
 ttk.Label(frame, text="Categoría:").grid(row=4, column=0, sticky="w")
 entry_categoria = ttk.Entry(frame)
 entry_categoria.grid(row=4, column=1, pady=5, padx=10, sticky="w")
+
+# -----------------------
+# Sección de Tapa y Base (inicialmente oculta)
+# -----------------------
+frame_tapa_base = ttk.LabelFrame(root, text="Selecciona Tapa y Base", padding=12)
+frame_tapa_base.pack(fill="x", padx=20, pady=(10,0))
+
+# Tapa
+label_tapa = ttk.Label(frame_tapa_base, text="Tapa:")
+label_tapa.grid(row=0, column=0, sticky="w", pady=5)
+
+combo_tapa = ttk.Combobox(frame_tapa_base, state="readonly", width=30)
+combo_tapa.bind("<<ComboboxSelected>>", seleccionar_codigo_tapa)
+combo_tapa.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+
+label_tapa.grid_remove()
+combo_tapa.grid_remove()
+
+# Base
+label_base = ttk.Label(frame_tapa_base, text="Base:")
+label_base.grid(row=1, column=0, sticky="w", pady=5)
+
+combo_base = ttk.Combobox(frame_tapa_base, state="readonly", width=30)
+combo_base.bind("<<ComboboxSelected>>", seleccionar_codigo_base)
+combo_base.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+
+label_base_info = ttk.Label(frame_tapa_base, text="", foreground="green")
+label_base_info.grid(row=1, column=2, padx=10, pady=5, sticky="w")
+
+label_base.grid_remove()
+combo_base.grid_remove()
 
 # -----------------------
 # Botones de Categoría (mejorados y más pequeños)
