@@ -8,19 +8,110 @@ productos = {}
 
 # Lista de códigos de escupideras (NOMBRE + PRECIO placeholder "$%%%")
 codigos_escupideras = {
-    "ESCL": ("Escupidera Light con tapa", "$%%%"),
-    "ESL-B": ("Escupidera Light base", "$%%%"),
-    "ESST": ("Escupidera Estándar", "$%%%"),
-    "ESST-B": ("Escupidera Estándar base", "$%%%"),
-    "ESCB": ("Escupidera Cronos", "$%%%"),
-    "ESCB-B": ("Escupidera Cronos base", "$%%%"),
-    "ESCHB": ("Escupidera Huevo", "$%%%"),
-    "ESCHB-B": ("Escupidera Huevo base", "$%%%"),
-    "ESCZ": ("Escupidera Zapato", "$%%%"),
-    "ESCZ-B": ("Escupidera Zapato base", "$%%%"),
-    "ESCES": ("Escupidera Estándar", "$%%%")
-}
+    "ESLB": ("Esc Light", "$%%%"),
+    "ESLB-B": ("Esc Light Base", "$%%%"),
+    "ESLN": ("Esc Light Negro", "$%%%"),
+    "ESLN-B": ("Esc Light Base Negro", "$%%%"),
 
+    "ESST": ("Esc Estandar", "$%%%"),
+    "ESST-B": ("Esc Estandar Base", "$%%%"),
+    "ESTN": ("Escupidera Estandar Negro", "$%%%"),
+    "ESTN-B": ("Escupidera Estandar Negro Base", "$%%%"),
+
+    "ESCB": ("Esc Cronos", "$%%%"),
+    "ESCB-B": ("Esc Cronos Base", "$%%%"),
+    "ESCN": ("Escupidera Cronos Negro", "$%%%"),
+    "ESCN-B": ("Escupidera Cronos Negro Base", "$%%%"),
+
+    "ESCHB": ("Esc Huevo", "$%%%"),
+    "ESCHB-B": ("Esc Huevo Base", "$%%%"),
+
+    "ESCZB": ("Esc Zapato", "$%%%"),
+    "ESCZ-B": ("Esc Zapato Base", "$%%%"),
+    "ESCZN": ("Escupidera Zapato Negro", "$%%%"),
+    "ESCZN-B": ("Escupidera Zapato Negro Base", "$%%%"),
+
+    "MLTB": ("Modulo Light", "$%%%"),
+    "MLTB-B": ("Modulo Light Base", "$%%%"),
+    "MLTN": ("Modulo Light Negro", "$%%%"),
+    "MLTN-B": ("Modulo Light Negro Base", "$%%%"),
+
+    "MMLN": ("Modulo Media Luna", "$%%%"),
+    "MMLN-B": ("Modulo Media Luna Base", "$%%%"),
+
+    "MCPB": ("Modulo Cronos Pequeño", "$%%%"),
+    "MCPB-B": ("Modulo Cronos Pequeño Base", "$%%%"),
+    "MCPN": ("Modulo Cronos Pequeño Negro", "$%%%"),
+    "MCPN-B": ("Modulo Cronos Pequeño Negro Base", "$%%%"),
+
+    "MCGB": ("Modulo Cronos", "$%%%"),
+    "MCGB-B": ("Modulo Cronos Base", "$%%%"),
+    "MCGN": ("Modulo Cronos Negro", "$%%%"),
+    "MCGN-B": ("Modulo Cronos Base Negro", "$%%%"),
+
+    "MOVB": ("Modulo Vex", "$%%%"),
+    "MOVB-B": ("Modulo Vex Base", "$%%%"),
+    "MOVN": ("Modulo Vex Negro", "$%%%"),
+    "MOVN-B": ("Modulo Vex Base Negro", "$%%%"),
+
+    "006-MOD": ("Modulo Cuadrado", "$%%%"),
+    "006-MOD-B": ("Modulo Cuadrado Base", "$%%%"),
+    "007-MOD": ("Modulo Y", "$%%%"),
+    "007-MOD-B": ("Modulo Y Base", "$%%%"),
+
+    "GUAB": ("Guarda 1", "$%%%"),
+    "GUAN": ("Guarda 1 Negro", "$%%%"),
+    "GULB": ("Guarda 2", "$%%%"),
+    "GULN": ("Guarda 2 Negro", "$%%%"),
+    "G3LB": ("Guarda 3 Larga", "$%%%"),
+    "G3LN": ("Guarda 3 Larga Negro", "$%%%"),
+    "G4CB": ("Guarda 4", "$%%%"),
+
+    "TLBB": ("Tapa Estetica", "$%%%"),
+    "TLBB-N": ("Tapa Estetica Negra", "$%%%"),
+
+    "001-LEN": ("Lentes", "$%%%"),
+
+    "TPCB": ("Tapa PC", "$%%%"),
+    "TPCN": ("Tapa PC Negro", "$%%%"),
+
+    "DOST": ("Domo Estandar", "$%%%"),
+    "002-DOM": ("Domo Led", "$%%%"),
+
+    "HUEB": ("Hueso", "$%%%"),
+    "HUEN": ("Hueso Negro", "$%%%"),
+
+    "NEGA": ("Negato Estandar", "$%%%"),
+    "NEGN": ("Negato Estandar Negro", "$%%%"),
+
+    "TCCB": ("Teclado Cronos", "$%%%"),
+    "TCCN": ("Teclado Cronos Negro", "$%%%"),
+
+    "CBZB": ("Cubre Brazos", "$%%%"),
+    "CBZN": ("Cubre Brazos Negro", "$%%%"),
+
+    "001-TAP-BAS": ("Tapa Base Grande Cuadrada", "$%%%"),
+    "002-TAP-BAS": ("Tapa Base Grande Redonda", "$%%%"),
+
+    "TL3B": ("Tapa Lateral con Hueco", "$%%%"),
+    "TL3N": ("Tapa Lateral con Hueco Negro", "$%%%"),
+
+    "001-TAP-EST": ("Tapa Estetica", "$%%%"),
+
+    "001-COP-G": ("Copa Grande", "$%%%"),
+    "002-COP-P": ("Copa Pequeña", "$%%%"),
+
+    "PT1B": ("Plataforma 1", "$%%%"),
+    "PT2B": ("Plataforma 2", "$%%%"),
+    "PT3B": ("Plataforma 3", "$%%%"),
+    "PT4B": ("Plataforma 4", "$%%%"),
+    "PT5B": ("Plataforma 5", "$%%%"),
+    "PT1B-N": ("Plataforma 1 Negra", "$%%%"),
+    "PT2B-N": ("Plataforma 2 Negra", "$%%%"),
+    "PT3B-N": ("Plataforma 3 Negra", "$%%%"),
+    "PT4B-N": ("Plataforma 4 Negra", "$%%%"),
+    "PT5B-N": ("Plataforma 5 Negra", "$%%%")
+}
 # -----------------------
 # Funciones
 # -----------------------
@@ -93,6 +184,25 @@ def set_categoria(cat):
     if cat == "Escupideras":
         combo_codigos['values'] = list(codigos_escupideras.keys())
         combo_codigos.grid(row=0, column=2, padx=(10,0), pady=5, sticky="w")
+    elif cat == "Módulos":
+        # Filtrar solo códigos de módulos
+        modulos = [
+            cod for cod in codigos_escupideras.keys()
+            if cod.startswith(("ML", "MM", "MC", "MO")) or "MOD" in cod
+        ]
+
+        combo_codigos['values'] = modulos
+        combo_codigos.grid(row=0, column=2, padx=(10,0), pady=5, sticky="w")
+
+        # Ocultar sección tapa/base (no aplica)
+        label_tapa.grid_remove()
+        combo_tapa.grid_remove()
+        label_base.grid_remove()
+        combo_base.grid_remove()
+        combo_tapa.set("")
+        combo_base.set("")
+        label_base_info.config(text="")
+
         
         # Separar tapas y bases
         tapas = [cod for cod in codigos_escupideras.keys() if not cod.endswith("-B")]
